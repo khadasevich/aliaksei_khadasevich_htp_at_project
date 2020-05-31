@@ -23,12 +23,13 @@
                 <version>2.21.0</version>
                 <configuration>
                     <testFailureIgnore>true</testFailureIgnore>
-                    <!--<argLine>-->
-                        <!-- -Dcucumber.options="&#45;&#45;plugin ru.yandex.qatools.allure.cucumberjvm.AllureReporter"-->
-                    <!--</argLine>-->
                     <includes>
-                        <include>**/TestRunner.java</include>
+                        <!--<include>**/TestRunner.java</include>-->
+                        <include>**/FakeRunner1.java</include>
+                        <include>**/FakeRunner2.java</include>
                     </includes>
+                    <forkCount>2</forkCount>
+                    <reuseForks>true</reuseForks>
                 </configuration>
             </plugin>
         </plugins>
