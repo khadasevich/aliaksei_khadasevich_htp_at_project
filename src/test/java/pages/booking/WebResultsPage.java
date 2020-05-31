@@ -1,16 +1,17 @@
-package pages;
+package pages.booking;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import pages.WebAbstractPage;
 import utilities.BookingUtils;
 import utilities.LogTool;
 
 import static utilities.BookingUtils.getPriceForNight;
 
-public class BookingResultsPage extends BookingAbstractPage {
+public class WebResultsPage extends WebAbstractPage {
 
     JavascriptExecutor javascriptExecutor = (JavascriptExecutor) driver;
 
@@ -59,7 +60,7 @@ public class BookingResultsPage extends BookingAbstractPage {
 
     String hotelNamesXpath = "//*[@class='hotel_name_link url']//descendant::span[@data-et-click]";
 
-    public BookingResultsPage(WebDriver driver) {
+    public WebResultsPage(WebDriver driver) {
         super(driver);
     }
 

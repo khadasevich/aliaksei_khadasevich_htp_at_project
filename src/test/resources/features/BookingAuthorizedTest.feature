@@ -1,6 +1,6 @@
 Feature: Booking Authorized Tests
 
-# @qa
+ @qa
   Scenario: I login as registered user there is no notification about registration
     Given Open Main Page
     When I login
@@ -17,7 +17,7 @@ Feature: Booking Authorized Tests
       | city     | rooms | children | adults | startFrom | endingDate |
       | "Madrid" | 1     | 0        | 2      | 3         | 5          |
 
-#  @qa
+  @qa
   Scenario: I login as registered user and expect to see 12 itesm in the booking header
     Given Open Main Page
     When I login

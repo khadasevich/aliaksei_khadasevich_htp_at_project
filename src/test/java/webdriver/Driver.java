@@ -19,7 +19,7 @@ public class Driver {
     public static void initDriver() {
         if (null == driver.get()) {
             try {
-                driver.set(DriverManager.getChromeDriver());
+                driver.set(DriverManager.getDriver(Config.CHROME));
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -29,7 +29,7 @@ public class Driver {
     public static WebDriver getWebDriver() {
         if (null == driver.get()) {
             try {
-                driver.set(DriverManager.getChromeDriver());
+                driver.set(DriverManager.getDriver(Config.CHROME));
             } catch (Exception e) {
                 e.printStackTrace();
             }

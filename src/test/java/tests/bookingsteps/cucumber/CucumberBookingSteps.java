@@ -6,10 +6,9 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.junit.*;
-import org.openqa.selenium.WebDriver;
-import pages.BookingMainPage;
-import pages.BookingMyListPage;
-import pages.BookingResultsPage;
+import pages.booking.WebMainPage;
+import pages.booking.WebMyListPage;
+import pages.booking.WebResultsPage;
 import testobjects.bookingobjects.RegisteredTestUserJsonObject;
 import tests.bookingsteps.preconditions.SignIn;
 import utilities.MyJsonParser;
@@ -22,12 +21,11 @@ import static org.junit.Assert.assertEquals;
 
 public class CucumberBookingSteps {
 
-    static WebDriver driver;
     private static final String BOOKING_URL = "https://www.booking.com/";
     private static final String WISHLIST_URL = "https://www.booking.com/mywishlist.html";
-    static BookingMainPage bookingMainPage;
-    static BookingResultsPage bookingResultPage;
-    static BookingMyListPage myListPage;
+    static WebMainPage bookingMainPage;
+    static WebResultsPage bookingResultPage;
+    static WebMyListPage myListPage;
     int expected;
     int actual;
     String expectedFirstHotel;
@@ -35,16 +33,15 @@ public class CucumberBookingSteps {
 
     @Before
     public static void initializeDriver() {
-        driver = Driver.getWebDriver();
+        Driver.initDriver();
         Driver.setTimeout();
-        bookingMainPage = new BookingMainPage(driver);
-        bookingResultPage = new BookingResultsPage(driver);
-        myListPage = new BookingMyListPage(driver);
+        bookingMainPage = new WebMainPage(Driver.getWebDriver());
+        bookingResultPage = new WebResultsPage(Driver.getWebDriver());
+        myListPage = new WebMyListPage(Driver.getWebDriver());
     }
 
     @Given("Open Main Page")
     public void openMainPage() {
-
         bookingMainPage.openMainPage(BOOKING_URL);
     }
 
@@ -75,7 +72,7 @@ public class CucumberBookingSteps {
     public void iLogin() throws IOException {
         RegisteredTestUserJsonObject registeredTestUserJsonObject = MyJsonParser.getTestUser();
         bookingMainPage.goToSignIn();
-        SignIn.goThroughLogin(driver, registeredTestUserJsonObject.getEmail(), registeredTestUserJsonObject.getPassword());
+        SignIn.goThroughLogin(Driver.getWebDriver(), registeredTestUserJsonObject.getEmail(), registeredTestUserJsonObject.getPassword());
     }
 
     @And("Search trip with param: {string}, {int}, {int}, {int}, {int}, {int} and select hotels")

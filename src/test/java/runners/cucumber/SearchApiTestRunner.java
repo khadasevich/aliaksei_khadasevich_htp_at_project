@@ -13,7 +13,6 @@ import org.junit.runner.RunWith;
         },
         tags = {"@qa or @prod"}, //annotation @qa or @prod should be added to .feature file
         monochrome = false, // pretty print
-        snippets = SnippetType.CAMELCASE, // generates steps
         strict = false //
 )
 public class SearchApiTestRunner {

@@ -23,7 +23,6 @@ import java.io.IOException;
         },
         tags = {"@qa or @prod"},
         monochrome = false,
-        snippets = SnippetType.CAMELCASE,
         strict = false
 )
 public class BookingAuthorizedTestRunner {
@@ -34,13 +33,13 @@ public class BookingAuthorizedTestRunner {
 
         @BeforeClass
         public static void setUp() throws IOException, InterruptedException {
-                WebDriver driver = Driver.getWebDriver();
+                Driver.initDriver();
                 Driver.setTimeout();
                 String email = GenerateFakeAddress.generateEmail();
                 RegisteredTestUserJsonObject testuser = new RegisteredTestUserJsonObject(email, password);
                 MyJsonParser.saveJsonToFile(filePath, testuser);
-                Registration.performRegistration(driver, email, password, BOOKING_URL);
-                Driver.quitDriver();
+                Registration.performRegistration(Driver.getWebDriver(), email, password, BOOKING_URL);
+                Driver.clearCache();
         }
 
         @AfterClass

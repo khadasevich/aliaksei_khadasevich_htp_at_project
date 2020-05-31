@@ -1,11 +1,12 @@
-package pages;
+package pages.booking;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import pages.WebAbstractPage;
 import utilities.LogTool;
 
-public class BookingRegistrationPage extends BookingAbstractPage {
+public class WebRegistrationPage extends WebAbstractPage {
 
     @FindBy(xpath = "//*[@id='login_name_register']")
     private WebElement emailField;
@@ -19,7 +20,7 @@ public class BookingRegistrationPage extends BookingAbstractPage {
     @FindBy(xpath = "//*[@id='wl252-modal-name']")
     private WebElement modalPop;
 
-    public BookingRegistrationPage(WebDriver driver) {
+    public WebRegistrationPage(WebDriver driver) {
         super(driver);
     }
 

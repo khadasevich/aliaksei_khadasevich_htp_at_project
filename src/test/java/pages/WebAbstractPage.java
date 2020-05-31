@@ -3,11 +3,11 @@ package pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
-public abstract class BookingAbstractPage {
+public abstract class WebAbstractPage {
 
     protected WebDriver driver;
 
-    BookingAbstractPage(WebDriver driver) {
+    public WebAbstractPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(this.driver, this);
     }

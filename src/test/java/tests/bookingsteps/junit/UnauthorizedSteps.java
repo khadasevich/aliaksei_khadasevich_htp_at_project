@@ -1,9 +1,8 @@
 package tests.bookingsteps.junit;
 
 import org.junit.*;
-import org.openqa.selenium.WebDriver;
-import pages.BookingMainPage;
-import pages.BookingResultsPage;
+import pages.booking.WebMainPage;
+import pages.booking.WebResultsPage;
 import utilities.LogTool;
 import webdriver.Driver;
 
@@ -11,22 +10,23 @@ import static org.junit.Assert.assertEquals;
 
 public class UnauthorizedSteps {
 
-    static WebDriver driver;
     private static final String BOOKING_URL = "https://www.booking.com/";
-    BookingMainPage bookingMainPage;
-    BookingResultsPage bookingResultPage;
+    WebMainPage bookingMainPage;
+    WebResultsPage bookingResultPage;
 
     @BeforeClass
     public static void startBrowser() {
-        driver = Driver.getWebDriver();
+        Driver.initDriver();
         Driver.setTimeout();
         LogTool.info("Driver for testing initialized");
     }
 
     @Before
     public void initializePages() {
-        bookingMainPage = new BookingMainPage(driver);
-        bookingResultPage = new BookingResultsPage(driver);
+        Driver.setTimeout();
+        LogTool.info("Driver for testing initialized");
+        bookingMainPage = new WebMainPage(Driver.getWebDriver());
+        bookingResultPage = new WebResultsPage(Driver.getWebDriver());
         LogTool.info("Pages for testing initialized");
     }
 

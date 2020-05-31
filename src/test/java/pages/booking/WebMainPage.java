@@ -1,10 +1,11 @@
-package pages;
+package pages.booking;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
+import pages.WebAbstractPage;
 import utilities.LogTool;
 
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ import java.util.List;
 import static utilities.BookingUtils.*;
 
 
-public class BookingMainPage extends BookingAbstractPage {
+public class WebMainPage extends WebAbstractPage {
 
     protected Actions builder;
 
@@ -72,7 +73,7 @@ public class BookingMainPage extends BookingAbstractPage {
     String headerItemsXpath = "//*[@id='user_form']/ul/li|//*[@id='logo_no_globe_new_logo']|" +
             "//*[@class='xpb__link']|//*[@class='xpb__link selected']";
 
-    public BookingMainPage(WebDriver driver) {
+    public WebMainPage(WebDriver driver) {
         super(driver);
         this.builder = new Actions(driver);
     }

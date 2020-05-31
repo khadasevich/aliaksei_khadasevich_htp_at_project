@@ -15,7 +15,6 @@ import webdriver.Driver;
         },
         tags = {"@qa or @prod"},
         monochrome = false,
-        snippets = SnippetType.CAMELCASE,
         strict = false
 )
 public class BookingUnauthorizedTestRunner {

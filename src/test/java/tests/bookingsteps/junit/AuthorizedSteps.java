@@ -3,10 +3,12 @@ package tests.bookingsteps.junit;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.junit.*;
-import org.openqa.selenium.WebDriver;
+import pages.booking.WebMainPage;
+import pages.booking.WebMyListPage;
+import pages.booking.WebRegistrationPage;
+import pages.booking.WebResultsPage;
 import tests.wssearchsteps.cucumber.CucumberSearchSteps;
 import utilities.GenerateFakeAddress;
-import pages.*;
 import tests.bookingsteps.preconditions.Registration;
 import tests.bookingsteps.preconditions.SignIn;
 import webdriver.Driver;
@@ -17,34 +19,33 @@ import static org.junit.Assert.assertEquals;
 
 public class AuthorizedSteps {
 
-    static WebDriver driver;
     private static final String BOOKING_URL = "https://www.booking.com/";
     private static final String WISHLIST_URL = "https://www.booking.com/mywishlist.html";
     private static final String password = "123456QW";
     private static final Logger LOGGER = LogManager.getLogger(CucumberSearchSteps.class);
-    BookingMainPage bookingMainPage;
-    BookingResultsPage bookingResultPage;
-    BookingRegistrationPage bookingRegistrationPage;
-    BookingMyListPage myListPage;
+    WebMainPage bookingMainPage;
+    WebResultsPage bookingResultPage;
+    WebRegistrationPage bookingRegistrationPage;
+    WebMyListPage myListPage;
     static String email;
 
     @BeforeClass
     public static void baseActions() throws InterruptedException {
         LOGGER.info("Booking authorized testing starts");
-        driver = Driver.getWebDriver();
+        Driver.initDriver();
         Driver.setTimeout();
         email = GenerateFakeAddress.generateEmail();
-        Registration.performRegistration(driver, email, password, BOOKING_URL);
+        Registration.performRegistration(Driver.getWebDriver(), email, password, BOOKING_URL);
         LOGGER.info("Registration finished");
         Driver.clearCache();
     }
 
     @Before
     public void initializePages() {
-        bookingMainPage = new BookingMainPage(driver);
-        bookingResultPage = new BookingResultsPage(driver);
-        bookingRegistrationPage = new BookingRegistrationPage(driver);
-        myListPage = new BookingMyListPage(driver);
+        bookingMainPage = new WebMainPage(Driver.getWebDriver());
+        bookingResultPage = new WebResultsPage(Driver.getWebDriver());
+        bookingRegistrationPage = new WebRegistrationPage(Driver.getWebDriver());
+        myListPage = new WebMyListPage(Driver.getWebDriver());
         LOGGER.info("Pages for testing initialized");
     }
 
@@ -52,7 +53,7 @@ public class AuthorizedSteps {
     public void registrationTest() {
         bookingMainPage.openMainPage(BOOKING_URL);
         bookingMainPage.goToSignIn();
-        SignIn.goThroughLogin(driver, email, password);
+        SignIn.goThroughLogin(Driver.getWebDriver(), email, password);
         bookingMainPage.openNotification();
         String expected = "Your account hasn't been activated. That means you're missing out on member perks. " +
                 "Would you like us to resend the activation email?";
@@ -65,8 +66,8 @@ public class AuthorizedSteps {
         String expectedColor = "rgb(204, 0, 0)";
         bookingMainPage.openMainPage(BOOKING_URL);
         bookingMainPage.goToSignIn();
-        SignIn.goThroughLogin(driver, email, password);
-        bookingMainPage.goToSearchResultsWebDriver("Madrid", 1, 0, 2, 30, 35);
+        SignIn.goThroughLogin(Driver.getWebDriver(), email, password);
+        bookingMainPage.goToSearchResultsWebDriver("Madrid", 1, 0, 2, 3, 5);
         String expectedFirstHotel = bookingResultPage.firstHotelName();
         bookingResultPage.saveFirstItem();
         Driver.waitUntilItemWillBeShown(bookingResultPage.getSavedPopUp());
@@ -86,7 +87,7 @@ public class AuthorizedSteps {
     public void headerItemsTest() {
         bookingMainPage.openMainPage(BOOKING_URL);
         bookingMainPage.goToSignIn();
-        SignIn.goThroughLogin(driver, email, password);
+        SignIn.goThroughLogin(Driver.getWebDriver(), email, password);
         Driver.waitUntilItemWillBeShown(bookingMainPage.getProfileElement());
         assertEquals("Quantity of items isn't expected", 12,
                 bookingMainPage.getQuantityOfItemsInHeader());

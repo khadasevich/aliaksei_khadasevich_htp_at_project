@@ -1,14 +1,13 @@
-package pages;
+package pages.yopmail;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import pages.WebAbstractPage;
 
 import java.util.Set;
 
-public class ConfirmRegistration extends BookingAbstractPage {
-
-    protected WebDriver driver;
+public class ConfirmRegistration extends WebAbstractPage {
 
     private static final String YOPMAIL_URL = "http://www.yopmail.com/en/";
 

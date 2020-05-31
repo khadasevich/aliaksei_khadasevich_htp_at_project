@@ -1,9 +1,9 @@
 package tests.bookingsteps.preconditions;
 
 import org.openqa.selenium.WebDriver;
-import pages.ConfirmRegistration;
-import pages.BookingMainPage;
-import pages.BookingRegistrationPage;
+import pages.yopmail.ConfirmRegistration;
+import pages.booking.WebMainPage;
+import pages.booking.WebRegistrationPage;
 import webdriver.Driver;
 
 public class Registration {
@@ -13,8 +13,8 @@ public class Registration {
                                            String password,
                                            String url) throws InterruptedException {
         ConfirmRegistration confirmRegistration = new ConfirmRegistration(driver);
-        BookingMainPage bookingMainPage = new BookingMainPage(driver);
-        BookingRegistrationPage bookingRegistrationPage = new BookingRegistrationPage(driver);
+        WebMainPage bookingMainPage = new WebMainPage(driver);
+        WebRegistrationPage bookingRegistrationPage = new WebRegistrationPage(driver);
         bookingMainPage.openMainPage(url);
         bookingMainPage.goToRegistration();
         Driver.waitUntilItemWillBeShown(bookingRegistrationPage.getEmailFiled());
@@ -27,7 +27,7 @@ public class Registration {
         Driver.waitUntilItemWillBeShown(confirmRegistration.getRefreshButton());
         confirmRegistration.checkMail();
         Driver.waitUntilItemWillBeShown(confirmRegistration.getEmailFrame());
-        Thread.sleep(3000);
+        Thread.sleep(5000);
         confirmRegistration.confirmRegistration();
     }
 }
