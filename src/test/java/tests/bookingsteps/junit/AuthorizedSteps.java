@@ -32,8 +32,6 @@ public class AuthorizedSteps {
     @BeforeClass
     public static void baseActions() throws InterruptedException {
         LOGGER.info("Booking authorized testing starts");
-        Driver.initDriver();
-        Driver.setTimeout();
         email = GenerateFakeAddress.generateEmail();
         Registration.performRegistration(Driver.getWebDriver(), email, password, BOOKING_URL);
         LOGGER.info("Registration finished");
@@ -51,9 +49,7 @@ public class AuthorizedSteps {
 
     @Test
     public void registrationTest() {
-        bookingMainPage.openMainPage(BOOKING_URL);
-        bookingMainPage.goToSignIn();
-        SignIn.goThroughLogin(Driver.getWebDriver(), email, password);
+        startBookingAndLogin();
         bookingMainPage.openNotification();
         String expected = "Your account hasn't been activated. That means you're missing out on member perks. " +
                 "Would you like us to resend the activation email?";
@@ -64,9 +60,7 @@ public class AuthorizedSteps {
     @Test
     public void nextTripTest() {
         String expectedColor = "rgb(204, 0, 0)";
-        bookingMainPage.openMainPage(BOOKING_URL);
-        bookingMainPage.goToSignIn();
-        SignIn.goThroughLogin(Driver.getWebDriver(), email, password);
+        startBookingAndLogin();
         bookingMainPage.goToSearchResultsWebDriver("Madrid", 1, 0, 2, 3, 5);
         String expectedFirstHotel = bookingResultPage.firstHotelName();
         bookingResultPage.saveFirstItem();
@@ -85,9 +79,7 @@ public class AuthorizedSteps {
 
     @Test
     public void headerItemsTest() {
-        bookingMainPage.openMainPage(BOOKING_URL);
-        bookingMainPage.goToSignIn();
-        SignIn.goThroughLogin(Driver.getWebDriver(), email, password);
+        startBookingAndLogin();
         Driver.waitUntilItemWillBeShown(bookingMainPage.getProfileElement());
         assertEquals("Quantity of items isn't expected", 12,
                 bookingMainPage.getQuantityOfItemsInHeader());
@@ -99,9 +91,9 @@ public class AuthorizedSteps {
         LOGGER.info("Cache of browser cleared");
     }
 
-    @AfterClass
-    public static void stopBrowser() {
-        Driver.quitDriver();
-        LOGGER.info("Driver closed");
+    public void startBookingAndLogin() {
+        bookingMainPage.openMainPage(BOOKING_URL);
+        bookingMainPage.goToSignIn();
+        SignIn.goThroughLogin(Driver.getWebDriver(), email, password);
     }
 }

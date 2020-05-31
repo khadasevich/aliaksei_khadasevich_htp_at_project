@@ -25,6 +25,7 @@ public class Registration {
         Driver.waitUntilItemWillBeShown(bookingRegistrationPage.getModalPop());
         confirmRegistration.loginToMail(email);
         Driver.waitUntilItemWillBeShown(confirmRegistration.getRefreshButton());
+        Thread.sleep(2000);
         confirmRegistration.checkMail();
         Driver.waitUntilItemWillBeShown(confirmRegistration.getEmailFrame());
         Thread.sleep(5000);

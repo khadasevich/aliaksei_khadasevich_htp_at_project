@@ -14,13 +14,6 @@ public class UnauthorizedSteps {
     WebMainPage bookingMainPage;
     WebResultsPage bookingResultPage;
 
-    @BeforeClass
-    public static void startBrowser() {
-        Driver.initDriver();
-        Driver.setTimeout();
-        LogTool.info("Driver for testing initialized");
-    }
-
     @Before
     public void initializePages() {
         Driver.setTimeout();
@@ -32,8 +25,7 @@ public class UnauthorizedSteps {
 
     @Test
     public void parisTest() {
-        bookingMainPage.openMainPage(BOOKING_URL);
-        bookingMainPage.goToSearchResultsWebDriver("Paris", 2, 0, 4, 3, 10);
+        goToBookingAndSearch("Paris", 2, 0, 4, 3, 10);
         int expected = bookingResultPage.getMaxFilterPrice();
         bookingResultPage.sortPrice();
         Driver.waitUntilElementIsVisible(bookingResultPage.getOverlay());
@@ -43,8 +35,7 @@ public class UnauthorizedSteps {
 
     @Test
     public void moscowTest() {
-        bookingMainPage.openMainPage(BOOKING_URL);
-        bookingMainPage.goToElementBuilder("Moscow", 2, 0, 4, 10, 15);
+        goToBookingAndSearch("Moscow", 2, 0, 4, 10, 15);
         int expected = bookingResultPage.getMinFilterPrice();
         Driver.waitUntilElementIsVisible(bookingResultPage.getOverlay());
         int actual = bookingResultPage.getActualTopElementPrice(5);
@@ -53,8 +44,7 @@ public class UnauthorizedSteps {
 
     @Test
     public void osloTest() throws InterruptedException {
-        bookingMainPage.openMainPage(BOOKING_URL);
-        bookingMainPage.goToSearchResultsWebDriver("Oslo", 1, 2, 2, 1, 2);
+        goToBookingAndSearch("Oslo", 1, 2, 2, 1, 2);
         bookingResultPage.filterHotelsByStars();
         Driver.waitUntilElementIsVisible(bookingResultPage.getOverlay());
         bookingResultPage.javascriptFunction();
@@ -68,9 +58,8 @@ public class UnauthorizedSteps {
         LogTool.info("Cache of browser cleared");
     }
 
-    @AfterClass
-    public static void stopBrowser() {
-        Driver.quitDriver();
-        LogTool.info("Driver closed");
+    public void goToBookingAndSearch(String city, int rooms, int children, int adults, int start, int end){
+        bookingMainPage.openMainPage(BOOKING_URL);
+        bookingMainPage.goToSearchResultsWebDriver(city, rooms, children, adults, start, end);
     }
 }
