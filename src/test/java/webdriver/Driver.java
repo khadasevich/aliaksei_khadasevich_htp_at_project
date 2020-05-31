@@ -4,13 +4,14 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 
+import java.net.MalformedURLException;
 import java.time.Duration;
 
 import java.util.concurrent.TimeUnit;
 
 public class Driver {
 
-    private static WebDriver webDriver;
+    private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
     private static FluentWait<WebDriver> fluentWait;
 
     private Driver() throws IllegalAccessError {
@@ -18,21 +19,31 @@ public class Driver {
     }
 
     public static void initDriver() {
-
+        if (null == driver.get()) {
+            try {
+                driver.set(DriverManager.getChromeDriver());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public static WebDriver getWebDriver() {
-        if (webDriver == null) {
-            webDriver = DriverManager.getChromeDriver();
+        if (null == driver.get()) {
+            try {
+                driver.set(DriverManager.getChromeDriver());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
-        return webDriver;
+        return driver.get();
     }
 
 
     public static void clearCache() throws InterruptedException {
-        webDriver.manage().deleteAllCookies();
-        webDriver.get("chrome://settings/clearBrowserData");
-        WebElement root1 = webDriver.findElement(By.cssSelector("settings-ui"));
+        driver.get().manage().deleteAllCookies();
+        driver.get().get("chrome://settings/clearBrowserData");
+        WebElement root1 = driver.get().findElement(By.cssSelector("settings-ui"));
         WebElement shadowRoot1 = expandRootElement(root1);
         WebElement root2 = shadowRoot1.findElement(By.cssSelector("settings-main"));
         WebElement shadowRoot2 = expandRootElement(root2);
@@ -49,29 +60,29 @@ public class Driver {
     }
 
     private static WebElement expandRootElement(WebElement element) {
-        return (WebElement) ((JavascriptExecutor) webDriver)
+        return (WebElement) ((JavascriptExecutor) driver.get())
                 .executeScript("return arguments[0].shadowRoot", element);
     }
 
     public static void quitDriver() {
-        webDriver.close();
-        webDriver.quit();
+        driver.get().close();
+        driver.get().quit();
     }
 
     public static void setTimeout() {
-        webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        webDriver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
-        webDriver.manage().timeouts().setScriptTimeout(10, TimeUnit.SECONDS);
+        driver.get().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.get().manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
+        driver.get().manage().timeouts().setScriptTimeout(10, TimeUnit.SECONDS);
     }
 
     public static void removeTimeout() {
-        webDriver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-        webDriver.manage().timeouts().pageLoadTimeout(0, TimeUnit.SECONDS);
-        webDriver.manage().timeouts().setScriptTimeout(0, TimeUnit.SECONDS);
+        driver.get().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+        driver.get().manage().timeouts().pageLoadTimeout(0, TimeUnit.SECONDS);
+        driver.get().manage().timeouts().setScriptTimeout(0, TimeUnit.SECONDS);
     }
 
     public static void waitUntilElementIsVisible(WebElement element) {
-        fluentWait = new FluentWait<>(webDriver)
+        fluentWait = new FluentWait<>(driver.get())
                 .withTimeout(Duration.ofSeconds(20))
                 .pollingEvery(Duration.ofMillis(500));
         removeTimeout();
@@ -84,7 +95,7 @@ public class Driver {
 
 
     public static void waitUntilItemWillBeShown(WebElement element) {
-        fluentWait = new FluentWait<>(webDriver)
+        fluentWait = new FluentWait<>(driver.get())
                 .withTimeout(Duration.ofSeconds(20))
                 .pollingEvery(Duration.ofMillis(500)).ignoring(TimeoutException.class);
         fluentWait.until(ExpectedConditions.visibilityOf(element));
