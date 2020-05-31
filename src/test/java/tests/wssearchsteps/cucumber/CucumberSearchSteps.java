@@ -6,7 +6,7 @@ import cucumber.api.java.en.When;
 import httpservice.PostSearchRequest;
 import org.apache.log4j.LogManager;
 import org.junit.Assert;
-import testobjects.ResponseBodyJsonObject;
+import testobjects.wssearrchobjects.ResponseBodyJsonObject;
 import tests.wssearchsteps.searchtesttools.SearchTestTools;
 import utilities.MyJsonParser;
 

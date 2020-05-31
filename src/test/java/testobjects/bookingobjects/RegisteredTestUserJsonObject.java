@@ -1,12 +1,12 @@
-package testobjects;
+package testobjects.bookingobjects;
 
-public class TestUser {
+public class RegisteredTestUserJsonObject {
 
     private final String email;
     private final String password;
 
 
-    public TestUser(String email, String password) {
+    public RegisteredTestUserJsonObject(String email, String password) {
         this.email = email;
         this.password = password;
     }

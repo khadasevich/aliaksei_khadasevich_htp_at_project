@@ -1,7 +1,7 @@
 package tests.wssearchsteps.searchtesttools;
 
-import testobjects.ResponseBodyJsonObject;
-import testobjects.UserJsonObject;
+import testobjects.wssearrchobjects.ResponseBodyJsonObject;
+import testobjects.wssearrchobjects.UserJsonObject;
 
 import java.util.List;
 

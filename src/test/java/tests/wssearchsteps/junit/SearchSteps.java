@@ -2,7 +2,7 @@ package tests.wssearchsteps.junit;
 
 import httpservice.PostSearchRequest;
 import org.junit.*;
-import testobjects.ResponseBodyJsonObject;
+import testobjects.wssearrchobjects.ResponseBodyJsonObject;
 import tests.wssearchsteps.searchtesttools.SearchTestTools;
 import utilities.MyJsonParser;
 

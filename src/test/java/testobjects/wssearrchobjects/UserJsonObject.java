@@ -1,4 +1,4 @@
-package testobjects;
+package testobjects.wssearrchobjects;
 
 import java.util.Objects;
 

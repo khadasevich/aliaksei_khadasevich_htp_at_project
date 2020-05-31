@@ -1,25 +1,11 @@
 package runners.cucumber;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import cucumber.api.CucumberOptions;
 import cucumber.api.SnippetType;
 import cucumber.api.junit.Cucumber;
 import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
-import org.openqa.selenium.WebDriver;
-import testobjects.TestUser;
-import tests.bookingsteps.preconditions.Registration;
-import utilities.GenerateFakeAddress;
-import utilities.MyJsonParser;
 import webdriver.Driver;
-
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Writer;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(

@@ -10,7 +10,7 @@ import org.openqa.selenium.WebDriver;
 import pages.BookingMainPage;
 import pages.BookingMyListPage;
 import pages.BookingResultsPage;
-import testobjects.TestUser;
+import testobjects.bookingobjects.RegisteredTestUserJsonObject;
 import tests.bookingsteps.preconditions.SignIn;
 import utilities.MyJsonParser;
 import webdriver.Driver;
@@ -73,9 +73,9 @@ public class CucumberBookingSteps {
 
     @When("I login")
     public void iLogin() throws IOException {
-        TestUser testUser = MyJsonParser.getTestUser();
+        RegisteredTestUserJsonObject registeredTestUserJsonObject = MyJsonParser.getTestUser();
         bookingMainPage.goToSignIn();
-        SignIn.goThroughLogin(driver, testUser.getEmail(), testUser.getPassword());
+        SignIn.goThroughLogin(driver, registeredTestUserJsonObject.getEmail(), registeredTestUserJsonObject.getPassword());
     }
 
     @And("Search trip with param: {string}, {int}, {int}, {int}, {int}, {int} and select hotels")

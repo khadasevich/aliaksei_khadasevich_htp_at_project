@@ -2,10 +2,9 @@ package utilities;
 
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
-import org.apache.http.util.EntityUtils;
-import testobjects.ResponseBodyJsonObject;
-import testobjects.SearchRequestJsonObject;
-import testobjects.TestUser;
+import testobjects.wssearrchobjects.ResponseBodyJsonObject;
+import testobjects.wssearrchobjects.SearchRequestJsonObject;
+import testobjects.bookingobjects.RegisteredTestUserJsonObject;
 
 import java.io.File;
 import java.io.FileReader;
@@ -41,9 +40,9 @@ public class MyJsonParser <T> {
         writer.close();
     }
 
-    public static TestUser getTestUser() throws IOException {
-        TestUser testUser = gson.fromJson(new JsonReader(new FileReader("src/test/resources/testdata/testuser")),
-                TestUser.class);
-        return testUser;
+    public static RegisteredTestUserJsonObject getTestUser() throws IOException {
+        RegisteredTestUserJsonObject registeredTestUserJsonObject = gson.fromJson(new JsonReader(new FileReader("src/test/resources/testdata/testuser")),
+                RegisteredTestUserJsonObject.class);
+        return registeredTestUserJsonObject;
     }
 }

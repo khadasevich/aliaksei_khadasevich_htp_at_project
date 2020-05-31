@@ -1,4 +1,4 @@
-package testobjects;
+package testobjects.wssearrchobjects;
 
 public class SearchRequestJsonObject {
 
