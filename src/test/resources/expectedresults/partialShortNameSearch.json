@@ -1,0 +1,19 @@
+{
+  "code": "0",
+  "data": [
+    {
+      "id": "2",
+      "username": "saldo",
+      "realname": "Saldo Rush",
+      "password": "hro8052w",
+      "email": "saldo.rush@mail.com"
+    },
+    {
+      "id": "4",
+      "username": "simon",
+      "realname": "Simon Greath",
+      "password": "qbmu76rb",
+      "email": "simon.greath@mail.com"
+    }
+  ]
+}
