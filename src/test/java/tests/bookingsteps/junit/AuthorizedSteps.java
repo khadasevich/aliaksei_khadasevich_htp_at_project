@@ -86,10 +86,11 @@ public class AuthorizedSteps {
     }
 
     @After
-    public void closeDriver() throws InterruptedException {
+    public void clearCache() throws InterruptedException {
         Driver.clearCache();
         LOGGER.info("Cache of browser cleared");
     }
+
 
     public void startBookingAndLogin() {
         bookingMainPage.openMainPage(BOOKING_URL);

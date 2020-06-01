@@ -67,6 +67,10 @@ public class Driver {
         driver.get().quit();
     }
 
+    public static void clearCookies() {
+        driver.get().manage().deleteAllCookies();
+    }
+
     public static void setTimeout() {
         driver.get().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.get().manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
