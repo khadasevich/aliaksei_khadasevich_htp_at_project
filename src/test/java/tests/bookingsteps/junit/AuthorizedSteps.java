@@ -3,10 +3,10 @@ package tests.bookingsteps.junit;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.junit.*;
-import pages.booking.WebMainPage;
-import pages.booking.WebMyListPage;
-import pages.booking.WebRegistrationPage;
-import pages.booking.WebResultsPage;
+import pages.booking.BookingMainPage;
+import pages.booking.BookingMyListPage;
+import pages.booking.BookingRegistrationPage;
+import pages.booking.BookingResultsPage;
 import tests.wssearchsteps.cucumber.CucumberSearchSteps;
 import utilities.GenerateFakeAddress;
 import tests.bookingsteps.preconditions.Registration;
@@ -23,10 +23,10 @@ public class AuthorizedSteps {
     private static final String WISHLIST_URL = "https://www.booking.com/mywishlist.html";
     private static final String password = "123456QW";
     private static final Logger LOGGER = LogManager.getLogger(CucumberSearchSteps.class);
-    WebMainPage bookingMainPage;
-    WebResultsPage bookingResultPage;
-    WebRegistrationPage bookingRegistrationPage;
-    WebMyListPage myListPage;
+    BookingMainPage bookingMainPage;
+    BookingResultsPage bookingResultPage;
+    BookingRegistrationPage bookingRegistrationPage;
+    BookingMyListPage myListPage;
     static String email;
 
     @BeforeClass
@@ -40,10 +40,10 @@ public class AuthorizedSteps {
 
     @Before
     public void initializePages() {
-        bookingMainPage = new WebMainPage(Driver.getWebDriver());
-        bookingResultPage = new WebResultsPage(Driver.getWebDriver());
-        bookingRegistrationPage = new WebRegistrationPage(Driver.getWebDriver());
-        myListPage = new WebMyListPage(Driver.getWebDriver());
+        bookingMainPage = new BookingMainPage(Driver.getWebDriver());
+        bookingResultPage = new BookingResultsPage(Driver.getWebDriver());
+        bookingRegistrationPage = new BookingRegistrationPage(Driver.getWebDriver());
+        myListPage = new BookingMyListPage(Driver.getWebDriver());
         LOGGER.info("Pages for testing initialized");
     }
 

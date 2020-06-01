@@ -1,8 +1,8 @@
 package tests.bookingsteps.junit;
 
 import org.junit.*;
-import pages.booking.WebMainPage;
-import pages.booking.WebResultsPage;
+import pages.booking.BookingMainPage;
+import pages.booking.BookingResultsPage;
 import utilities.LogTool;
 import webdriver.Driver;
 
@@ -11,15 +11,15 @@ import static org.junit.Assert.assertEquals;
 public class UnauthorizedSteps {
 
     private static final String BOOKING_URL = "https://www.booking.com/";
-    WebMainPage bookingMainPage;
-    WebResultsPage bookingResultPage;
+    BookingMainPage bookingMainPage;
+    BookingResultsPage bookingResultPage;
 
     @Before
     public void initializePages() {
         Driver.setTimeout();
         LogTool.info("Driver for testing initialized");
-        bookingMainPage = new WebMainPage(Driver.getWebDriver());
-        bookingResultPage = new WebResultsPage(Driver.getWebDriver());
+        bookingMainPage = new BookingMainPage(Driver.getWebDriver());
+        bookingResultPage = new BookingResultsPage(Driver.getWebDriver());
         LogTool.info("Pages for testing initialized");
     }
 

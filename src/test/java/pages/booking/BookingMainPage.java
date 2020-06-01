@@ -14,7 +14,7 @@ import java.util.List;
 import static utilities.BookingUtils.*;
 
 
-public class WebMainPage extends WebAbstractPage {
+public class BookingMainPage extends WebAbstractPage {
 
     protected Actions builder;
 
@@ -73,7 +73,7 @@ public class WebMainPage extends WebAbstractPage {
     String headerItemsXpath = "//*[@id='user_form']/ul/li|//*[@id='logo_no_globe_new_logo']|" +
             "//*[@class='xpb__link']|//*[@class='xpb__link selected']";
 
-    public WebMainPage(WebDriver driver) {
+    public BookingMainPage(WebDriver driver) {
         super(driver);
         this.builder = new Actions(driver);
     }

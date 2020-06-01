@@ -1,15 +1,15 @@
 package tests.bookingsteps.preconditions;
 
 import org.openqa.selenium.WebDriver;
-import pages.booking.WebMainPage;
-import pages.booking.WebSignPage;
+import pages.booking.BookingMainPage;
+import pages.booking.BookingSignPage;
 import webdriver.Driver;
 
 public class SignIn {
 
     public static void goThroughLogin(WebDriver driver, String email, String password) {
-        WebSignPage signPage = new WebSignPage(driver);
-        WebMainPage mainPage = new WebMainPage(driver);
+        BookingSignPage signPage = new BookingSignPage(driver);
+        BookingMainPage mainPage = new BookingMainPage(driver);
         signPage.provideEmail(email);
         Driver.waitUntilItemWillBeShown(signPage.getPasswordField());
         signPage.providePassword(password);

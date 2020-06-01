@@ -10,7 +10,7 @@ import utilities.LogTool;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WebMyListPage extends WebAbstractPage {
+public class BookingMyListPage extends WebAbstractPage {
 
     String myHotelsXpath = "//*[@class='js-listview-book js-listview-hotel-title']";
 
@@ -18,7 +18,7 @@ public class WebMyListPage extends WebAbstractPage {
             "div[@class='bui-group bui-card__actions' and contains(., 'View property')])[1]")
     private WebElement viewProperty;
 
-    public WebMyListPage(WebDriver driver) {
+    public BookingMyListPage(WebDriver driver) {
         super(driver);
     }
 

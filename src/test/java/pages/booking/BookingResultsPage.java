@@ -11,7 +11,7 @@ import utilities.LogTool;
 
 import static utilities.BookingUtils.getPriceForNight;
 
-public class WebResultsPage extends WebAbstractPage {
+public class BookingResultsPage extends WebAbstractPage {
 
     JavascriptExecutor javascriptExecutor = (JavascriptExecutor) driver;
 
@@ -60,7 +60,7 @@ public class WebResultsPage extends WebAbstractPage {
 
     String hotelNamesXpath = "//*[@class='hotel_name_link url']//descendant::span[@data-et-click]";
 
-    public WebResultsPage(WebDriver driver) {
+    public BookingResultsPage(WebDriver driver) {
         super(driver);
     }
 

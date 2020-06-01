@@ -6,9 +6,9 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.junit.*;
-import pages.booking.WebMainPage;
-import pages.booking.WebMyListPage;
-import pages.booking.WebResultsPage;
+import pages.booking.BookingMainPage;
+import pages.booking.BookingMyListPage;
+import pages.booking.BookingResultsPage;
 import testobjects.bookingobjects.RegisteredTestUserJsonObject;
 import tests.bookingsteps.preconditions.SignIn;
 import utilities.MyJsonParser;
@@ -23,9 +23,9 @@ public class CucumberBookingSteps {
 
     private static final String BOOKING_URL = "https://www.booking.com/";
     private static final String WISHLIST_URL = "https://www.booking.com/mywishlist.html";
-    static WebMainPage bookingMainPage;
-    static WebResultsPage bookingResultPage;
-    static WebMyListPage myListPage;
+    static BookingMainPage bookingMainPage;
+    static BookingResultsPage bookingResultPage;
+    static BookingMyListPage myListPage;
     int expected;
     int actual;
     String expectedFirstHotel;
@@ -35,9 +35,9 @@ public class CucumberBookingSteps {
     public static void initializeDriver() {
         Driver.initDriver();
         Driver.setTimeout();
-        bookingMainPage = new WebMainPage(Driver.getWebDriver());
-        bookingResultPage = new WebResultsPage(Driver.getWebDriver());
-        myListPage = new WebMyListPage(Driver.getWebDriver());
+        bookingMainPage = new BookingMainPage(Driver.getWebDriver());
+        bookingResultPage = new BookingResultsPage(Driver.getWebDriver());
+        myListPage = new BookingMyListPage(Driver.getWebDriver());
     }
 
     @Given("Open Main Page")

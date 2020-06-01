@@ -6,7 +6,7 @@ import org.openqa.selenium.support.FindBy;
 import pages.WebAbstractPage;
 import utilities.LogTool;
 
-public class WebSignPage extends WebAbstractPage {
+public class BookingSignPage extends WebAbstractPage {
 
     @FindBy(xpath = "//*[@id='username']")
     private WebElement emailFiled;
@@ -14,7 +14,7 @@ public class WebSignPage extends WebAbstractPage {
     @FindBy(xpath = "//*[@id='password']")
     private WebElement passwordField;
 
-    public WebSignPage(WebDriver driver) {
+    public BookingSignPage(WebDriver driver) {
         super(driver);
     }
 
