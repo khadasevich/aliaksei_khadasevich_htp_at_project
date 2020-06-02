@@ -42,8 +42,7 @@ public class CucumberSilverScreenSteps {
     @When("I login")
     public void iLogin() throws IOException {
         RegisteredTestUserJsonObject registeredTestUserJsonObject = MyJsonParser.getTestUser();
-        silverScreenMainPage.loginToSilverScreen(registeredTestUserJsonObject.getEmail(),
-                registeredTestUserJsonObject.getPassword());
+        loginToSilverScreen(registeredTestUserJsonObject.getEmail(), registeredTestUserJsonObject.getPassword());
     }
 
     @Then("I see the list of movie items")
@@ -68,5 +67,12 @@ public class CucumberSilverScreenSteps {
     @After
     public static void tearDown() {
         Driver.quitDriver();
+    }
+
+    public void loginToSilverScreen(String email, String password) {
+        silverScreenMainPage.hoverSignIn();
+        silverScreenMainPage.inputEmail(email);
+        silverScreenMainPage.inputPassword(password);
+        silverScreenMainPage.clickLogin();
     }
 }

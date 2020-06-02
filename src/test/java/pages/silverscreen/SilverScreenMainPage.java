@@ -88,15 +88,24 @@ public class SilverScreenMainPage extends WebAbstractPage {
         return resultHeader;
     }
 
-    public void loginToSilverScreen(String email, String password) {
+    public void hoverSignIn() {
         LogTool.debug("Hover element " + signInButton);
         builder.moveToElement(signInButton).perform();
+    }
+
+    public void inputEmail(String email) {
         LogTool.debug("Input email to " + emailField);
         emailField.clear();
         emailField.sendKeys(email);
+    }
+
+    public void inputPassword(String password) {
         LogTool.debug("Input password to " + passwordField);
         passwordField.clear();
         passwordField.sendKeys(password);
+    }
+
+    public void clickLogin() {
         LogTool.debug("Click element " + enterButton);
         enterButton.click();
     }
@@ -106,7 +115,7 @@ public class SilverScreenMainPage extends WebAbstractPage {
         exitButton.click();
     }
 
-    public String getTextOfHeader(){
+    public String getTextOfHeader() {
         LogTool.debug("Get text of element " + exitButton);
         return loggedHeader.getText();
     }
