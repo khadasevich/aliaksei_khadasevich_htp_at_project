@@ -14,8 +14,8 @@ public class SilverScreenTestTools {
         int flag = 0;
         for (String searchResult : searchResults) {
             if (!searchResult.contains(name)) {
-                System.out.println("Check Search result:\n");
-                System.out.println("User Id:" + searchResult + "\n");
+                System.out.println("Following search result doesn't contain: " + name);
+                System.out.println(searchResult + "\n");
                 flag = 1;
             }
         }

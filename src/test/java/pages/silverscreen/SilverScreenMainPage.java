@@ -1,6 +1,7 @@
 package pages.silverscreen;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -29,6 +30,23 @@ public class SilverScreenMainPage extends WebAbstractPage {
     @FindBy(xpath = "//*[@id='root']//descendant::h2[contains(., 'Фильмы')]")
     private WebElement resultHeader;
 
+    @FindBy(xpath = "//*[@id='root']//descendant::span[contains(., 'Вход')]")
+    private WebElement signInButton;
+
+    @FindBy(xpath = "//*[@id='root']//descendant::input[@type='email']")
+    private WebElement emailField;
+
+    @FindBy(xpath = "//*[@id='root']//descendant::input[@type='password']")
+    private WebElement passwordField;
+
+    @FindBy(xpath = "(//*[@id='root']//descendant::span[contains(., 'Мой уровень: ')])[1]")
+    private WebElement loggedHeader;
+
+    @FindBy(xpath = "//*[@id='root']//descendant::span[contains(., 'Выйти')]")
+    private WebElement exitButton;
+
+    @FindBy(xpath = "//*[@id='root']//descendant::button[contains(., 'Войти')]")
+    private WebElement enterButton;
 
     public SilverScreenMainPage(WebDriver driver) {
         super(driver);
@@ -42,12 +60,17 @@ public class SilverScreenMainPage extends WebAbstractPage {
 
     public void hoverSearch() {
         builder.moveToElement(search).perform();
+        LogTool.debug("Hover element " + search);
     }
 
     public void inputSearchRequest(String name) {
         searchField.click();
+        LogTool.debug("Click element " + searchField);
         searchField.clear();
+        LogTool.debug("Clear element " + searchField);
         searchField.sendKeys(name);
+        LogTool.debug("Send name of film to " + searchField);
+        searchField.sendKeys(Keys.ENTER);
     }
 
     public ArrayList<String> getArrayOfSearchResults() {
@@ -61,6 +84,30 @@ public class SilverScreenMainPage extends WebAbstractPage {
     }
 
     public WebElement getResultHeader() {
+        LogTool.debug("Return element " + resultHeader);
         return resultHeader;
+    }
+
+    public void loginToSilverScreen(String email, String password) {
+        LogTool.debug("Hover element " + signInButton);
+        builder.moveToElement(signInButton).perform();
+        LogTool.debug("Input email to " + emailField);
+        emailField.clear();
+        emailField.sendKeys(email);
+        LogTool.debug("Input password to " + passwordField);
+        passwordField.clear();
+        passwordField.sendKeys(password);
+        LogTool.debug("Click element " + enterButton);
+        enterButton.click();
+    }
+
+    public void logoutFromSilverScreen() {
+        LogTool.debug("Click element " + exitButton);
+        exitButton.click();
+    }
+
+    public String getTextOfHeader(){
+        LogTool.debug("Get text of element " + exitButton);
+        return loggedHeader.getText();
     }
 }

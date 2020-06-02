@@ -1,17 +1,19 @@
 package tests.silverscreensteps;
 
+import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.junit.AfterClass;
 import org.junit.Assert;
-import pages.booking.BookingMainPage;
-import pages.booking.BookingMyListPage;
-import pages.booking.BookingResultsPage;
 import pages.silverscreen.SilverScreenMainPage;
+import testobjects.bookingobjects.RegisteredTestUserJsonObject;
 import tests.silverscreensteps.silverscreentesttools.SilverScreenTestTools;
+import utilities.MyJsonParser;
 import webdriver.Driver;
+
+import java.io.IOException;
 
 public class CucumberSilverScreenSteps {
 
@@ -37,6 +39,13 @@ public class CucumberSilverScreenSteps {
 
     }
 
+    @When("I login")
+    public void iLogin() throws IOException {
+        RegisteredTestUserJsonObject registeredTestUserJsonObject = MyJsonParser.getTestUser();
+        silverScreenMainPage.loginToSilverScreen(registeredTestUserJsonObject.getEmail(),
+                registeredTestUserJsonObject.getPassword());
+    }
+
     @Then("I see the list of movie items")
     public void iSeeTheListOfMovieItems() {
         Driver.waitUntilItemWillBeShown(silverScreenMainPage.getResultHeader());
@@ -47,12 +56,17 @@ public class CucumberSilverScreenSteps {
     @Then("each item name or description contains \"(.*)\"")
     public void eachItemNameOrDescriptionContainsThing(String name) {
         boolean actual = SilverScreenTestTools.checkSearchResults(silverScreenMainPage.getArrayOfSearchResults(), name);
-        Assert.assertTrue("Check results of serach", actual);
+        Assert.assertTrue("Check results of search", actual);
     }
 
-    @AfterClass
+    @Then("I can see Red Carpet Club \"(.*)\" in upper right corner")
+    public void iCanSeeRedCarpetClubInUpperRightCorner(String level) {
+        Assert.assertTrue("Level of user isn't expected", silverScreenMainPage.getTextOfHeader().contains(level));
+        silverScreenMainPage.logoutFromSilverScreen();
+    }
+
+    @After
     public static void tearDown() {
         Driver.quitDriver();
     }
-
 }
