@@ -40,8 +40,8 @@ public class MyJsonParser <T> {
         writer.close();
     }
 
-    public static RegisteredTestUserJsonObject getTestUser() throws IOException {
-        RegisteredTestUserJsonObject registeredTestUserJsonObject = gson.fromJson(new JsonReader(new FileReader("src/test/resources/testdata/testuser")),
+    public static RegisteredTestUserJsonObject getTestUser(String filename) throws IOException {
+        RegisteredTestUserJsonObject registeredTestUserJsonObject = gson.fromJson(new JsonReader(new FileReader(filename)),
                 RegisteredTestUserJsonObject.class);
         return registeredTestUserJsonObject;
     }

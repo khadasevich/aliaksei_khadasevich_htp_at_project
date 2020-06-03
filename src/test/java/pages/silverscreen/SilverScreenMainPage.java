@@ -48,14 +48,20 @@ public class SilverScreenMainPage extends WebAbstractPage {
     @FindBy(xpath = "//*[@id='root']//descendant::button[contains(., 'Войти')]")
     private WebElement enterButton;
 
+    @FindBy(xpath = "//*[@id='root']//descendant::div[contains(., 'еобходимо')]")
+    private WebElement emptyFiledValidationToast;
+
+    @FindBy(xpath = "//*[@id='root']//descendant::div[contains(., 'ользователь')]//following-sibling::span[contains(., 'орее')]")
+    private WebElement unregisteredUserValidationToast;
+
     public SilverScreenMainPage(WebDriver driver) {
         super(driver);
         this.builder = new Actions(driver);
     }
 
     public void openMainPage(String baseUrl) {
-        driver.get(baseUrl);
         LogTool.debug("Opened URL " + baseUrl);
+        driver.get(baseUrl);
     }
 
     public void hoverSearch() {
@@ -118,5 +124,20 @@ public class SilverScreenMainPage extends WebAbstractPage {
     public String getTextOfHeader() {
         LogTool.debug("Get text of element " + exitButton);
         return loggedHeader.getText();
+    }
+
+    public String getTextOfToast() {
+        LogTool.debug("Get text of element " + emptyFiledValidationToast);
+        return emptyFiledValidationToast.getText();
+    }
+
+    public String getTextOfUnregisteredToast() {
+        LogTool.debug("Get text of element " + unregisteredUserValidationToast);
+        return unregisteredUserValidationToast.getText();
+    }
+
+    public void hoverEnter() {
+        LogTool.debug("Hover element " + enterButton);
+        builder.moveToElement(enterButton).perform();
     }
 }

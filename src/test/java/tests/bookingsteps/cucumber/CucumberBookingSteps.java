@@ -70,7 +70,7 @@ public class CucumberBookingSteps {
 
     @When("I login")
     public void iLogin() throws IOException {
-        RegisteredTestUserJsonObject registeredTestUserJsonObject = MyJsonParser.getTestUser();
+        RegisteredTestUserJsonObject registeredTestUserJsonObject = MyJsonParser.getTestUser("src/test/resources/testdata/testuser");
         bookingMainPage.goToSignIn();
         SignIn.goThroughLogin(Driver.getWebDriver(), registeredTestUserJsonObject.getEmail(), registeredTestUserJsonObject.getPassword());
     }

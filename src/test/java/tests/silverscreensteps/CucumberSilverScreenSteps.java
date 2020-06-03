@@ -5,7 +5,6 @@ import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import org.junit.AfterClass;
 import org.junit.Assert;
 import pages.silverscreen.SilverScreenMainPage;
 import testobjects.bookingobjects.RegisteredTestUserJsonObject;
@@ -36,13 +35,33 @@ public class CucumberSilverScreenSteps {
     public void iSearchForThingWord(String name) {
         silverScreenMainPage.hoverSearch();
         silverScreenMainPage.inputSearchRequest(name);
-
     }
 
     @When("I login")
     public void iLogin() throws IOException {
-        RegisteredTestUserJsonObject registeredTestUserJsonObject = MyJsonParser.getTestUser();
+        RegisteredTestUserJsonObject registeredTestUserJsonObject = MyJsonParser.
+                getTestUser("src/test/resources/testdata/silverscreentestuser");
         loginToSilverScreen(registeredTestUserJsonObject.getEmail(), registeredTestUserJsonObject.getPassword());
+    }
+
+    @When("I left blank login field")
+    public void iLeftBlankLoginField() {
+        loginToSilverScreen("", "123");
+    }
+
+    @When("I left blank password field")
+    public void iLeftBlankPasswordField() {
+        loginToSilverScreen("test@test.com", "");
+    }
+
+    @When("I login as unregistered user")
+    public void iLoginAsUnregisteredUser() {
+        loginToSilverScreen("test@mail.com", "123");
+    }
+
+    @Then("I see {string} message")
+    public void iSeeMessage(String string) {
+        Assert.assertEquals("Toast message isn't expected", string, silverScreenMainPage.getTextOfToast());
     }
 
     @Then("I see the list of movie items")
@@ -64,9 +83,11 @@ public class CucumberSilverScreenSteps {
         silverScreenMainPage.logoutFromSilverScreen();
     }
 
-    @After
-    public static void tearDown() {
-        Driver.quitDriver();
+    @Then("I see validation message")
+    public void iSeeValidationMessage() {
+        String expected = "Скорее всего вы еще не зарегистрированы";
+        Assert.assertEquals("Toast message isn't expected", expected,
+                silverScreenMainPage.getTextOfUnregisteredToast());
     }
 
     public void loginToSilverScreen(String email, String password) {
