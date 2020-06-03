@@ -73,7 +73,7 @@ public class CucumberSilverScreenSteps {
 
     @Then("each item name or description contains \"(.*)\"")
     public void eachItemNameOrDescriptionContainsThing(String name) {
-        boolean actual = SilverScreenTestTools.checkSearchResults(silverScreenMainPage.getArrayOfSearchResults(), name);
+        boolean actual = SilverScreenTestTools.checkSearchResults(silverScreenMainPage.getArrayOfSearchAndDescResults(), name);
         Assert.assertTrue("Check results of search", actual);
     }
 

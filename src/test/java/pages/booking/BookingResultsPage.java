@@ -8,6 +8,7 @@ import org.openqa.selenium.support.FindBy;
 import pages.WebAbstractPage;
 import utilities.BookingUtils;
 import utilities.LogTool;
+import webdriver.Driver;
 
 import static utilities.BookingUtils.getPriceForNight;
 
@@ -87,8 +88,8 @@ public class BookingResultsPage extends WebAbstractPage {
     }
 
     public void javascriptFunction() {
-        scrollPageDown(address);
-        hoverHotelName(address);
+        Driver.scrollPageDown(address);
+        Driver.hoverElement(address);
         changeHotelBackground();
         changeHotelNameColor();
     }
@@ -98,31 +99,10 @@ public class BookingResultsPage extends WebAbstractPage {
         return overlay;
     }
 
-    void scrollPageDown(WebElement element) {
-        LogTool.debug("Scroll to element " + element);
-        javascriptExecutor.executeScript("arguments[0].scrollIntoView();" +
-                "window.scrollBy(0,-100);", element);
-    }
-
-    void scrollPageUp(WebElement element) {
-        LogTool.debug("Scroll to element " + element);
-        javascriptExecutor.executeScript("arguments[0].scrollIntoView();" +
-                "window.scrollBy(0,100);", element);
-    }
-
     void changeHotelBackground() {
         LogTool.debug("Change colour of element");
         javascriptExecutor.executeScript("" +
                 "document.querySelector('#hotellist_inner > div:nth-child(11)').style.backgroundColor = 'green';");
-    }
-
-    void hoverHotelName(WebElement element) {
-        LogTool.debug("Hover element " + element);
-        String strJavaScript = "var element = arguments[0];"
-                + "var mouseEventObj = document.createEvent('MouseEvents');"
-                + "mouseEventObj.initEvent( 'mouseover', true, true );"
-                + "element.dispatchEvent(mouseEventObj);";
-        javascriptExecutor.executeScript(strJavaScript, element);
     }
 
     void changeHotelNameColor() {
@@ -185,19 +165,11 @@ public class BookingResultsPage extends WebAbstractPage {
         return driver.findElement(By.xpath(savedItemXpath)).getCssValue("fill");
     }
 
-    public void goToMyLists() {
-        scrollPageUp(profile);
-        LogTool.debug("Click element " + profile);
-        profile.click();
-        LogTool.debug("Click element " + myList);
-        myList.click();
-    }
-
-    public void goToMyListsByLink(String url){
+    public void goToMyListsByLink(String url) {
         driver.get(url);
     }
 
-    public WebElement getSavedPopUp(){
+    public WebElement getSavedPopUp() {
         LogTool.debug("Return element " + savedPopUp);
         return savedPopUp;
     }

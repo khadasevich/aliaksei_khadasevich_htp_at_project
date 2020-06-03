@@ -3,6 +3,8 @@ package webdriver;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
+import utilities.LogTool;
+
 import java.time.Duration;
 
 import java.util.concurrent.TimeUnit;
@@ -37,6 +39,29 @@ public class Driver {
         return driver.get();
     }
 
+    public static void scrollPageDown(WebElement element) {
+        LogTool.debug("Scroll to element " + element);
+        JavascriptExecutor javascriptExecutor = (JavascriptExecutor) driver.get();
+        javascriptExecutor.executeScript("arguments[0].scrollIntoView();" +
+                "window.scrollBy(0,-100);", element);
+    }
+
+    public static void scrollPageUp(WebElement element) {
+        LogTool.debug("Scroll to element " + element);
+        JavascriptExecutor javascriptExecutor = (JavascriptExecutor) driver.get();
+        javascriptExecutor.executeScript("arguments[0].scrollIntoView();" +
+                "window.scrollBy(0,100);", element);
+    }
+
+    public static void hoverElement(WebElement element) {
+        LogTool.debug("Hover element " + element);
+        JavascriptExecutor javascriptExecutor = (JavascriptExecutor) driver.get();
+        String strJavaScript = "var element = arguments[0];"
+                + "var mouseEventObj = document.createEvent('MouseEvents');"
+                + "mouseEventObj.initEvent( 'mouseover', true, true );"
+                + "element.dispatchEvent(mouseEventObj);";
+        javascriptExecutor.executeScript(strJavaScript, element);
+    }
 
     public static void clearCache() throws InterruptedException {
         driver.get().manage().deleteAllCookies();
@@ -57,7 +82,7 @@ public class Driver {
         Thread.sleep(5000);
     }
 
-    private static WebElement expandRootElement(WebElement element) {
+    public static WebElement expandRootElement(WebElement element) {
         return (WebElement) ((JavascriptExecutor) driver.get())
                 .executeScript("return arguments[0].shadowRoot", element);
     }
@@ -94,7 +119,6 @@ public class Driver {
         }
         setTimeout();
     }
-
 
     public static void waitUntilItemWillBeShown(WebElement element) {
         fluentWait = new FluentWait<>(driver.get())

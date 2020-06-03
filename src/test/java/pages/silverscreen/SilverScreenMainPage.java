@@ -7,10 +7,14 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import pages.WebAbstractPage;
+import testobjects.silverscreen.SilverScreenSearchResult;
 import utilities.LogTool;
+import webdriver.Driver;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 public class SilverScreenMainPage extends WebAbstractPage {
 
@@ -23,6 +27,11 @@ public class SilverScreenMainPage extends WebAbstractPage {
     private WebElement searchField;
 
     private final String searchResultXpath = "//*[@id='root']//descendant::a[@poster]//following-sibling::div";
+
+    private final String searchResultLink = "//*[@id='root']//descendant::a[@poster]//following-sibling::div//descendant::a[@class]";
+
+    @FindBy(xpath = "//*[@id='root']/div[2]/div/div[1]/div[1]/div[3]/span")
+    private WebElement description;
 
     @FindBy(xpath = "//*[@id='root']//descendant::a[@poster]//following-sibling::div")
     private WebElement searchResult;
@@ -85,6 +94,23 @@ public class SilverScreenMainPage extends WebAbstractPage {
         for (WebElement element : elementName) {
             LogTool.debug("Get text of element " + element);
             texts.add(element.getText());
+        }
+        return texts;
+    }
+
+    public ArrayList<SilverScreenSearchResult> getArrayOfSearchAndDescResults() {
+        ArrayList<SilverScreenSearchResult> texts = new ArrayList<>();
+        String newXpath;
+        String newLinkText;
+        List<WebElement> elementName = driver.findElements(By.xpath(searchResultLink));
+        for (int i = 1; i <= elementName.size(); i++) {
+            newXpath = "(" + searchResultLink + ")[" + i + "]";
+            WebElement newLink = driver.findElement(By.xpath(newXpath));
+            Driver.scrollPageDown(newLink);
+            newLinkText = newLink.getText();
+            newLink.click();
+            texts.add(new SilverScreenSearchResult(newLinkText, description.getText()));
+            driver.navigate().back();
         }
         return texts;
     }
