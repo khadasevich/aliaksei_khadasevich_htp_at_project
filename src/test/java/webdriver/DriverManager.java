@@ -6,6 +6,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import utilities.GetResourcesFile;
 
@@ -27,6 +28,8 @@ public class DriverManager {
                 return getInternetExploreDriver();
             case REMOTE:
                 return getRemoteDriver();
+            case MOBILE:
+                return getMobileDriver();
             default:
                 throw null;
         }
@@ -59,6 +62,15 @@ public class DriverManager {
         String pathToDriver = GetResourcesFile.getPath("webdriver/internetexplorer.exe");
         System.setProperty("webdriver.ie.driver", pathToDriver);
         driver = new InternetExplorerDriver();
+        return driver;
+    }
+
+    public static WebDriver getMobileDriver() throws MalformedURLException {
+        DesiredCapabilities caps = new DesiredCapabilities();
+        caps.setCapability("deviceName", "Pixel 3");
+        caps.setCapability("platformName", "android");
+        caps.setCapability("browserName", "chrome");
+        WebDriver driver =  new RemoteWebDriver(new URL("http://0.0.0.0:4723/wd/hub"), caps);
         return driver;
     }
 }

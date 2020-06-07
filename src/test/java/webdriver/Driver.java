@@ -21,7 +21,7 @@ public class Driver {
     public static void initDriver() {
         if (null == driver.get()) {
             try {
-                driver.set(DriverManager.getDriver(Config.CHROME));
+                driver.set(DriverManager.getDriver(Config.MOBILE));
             } catch (Exception e) {
                 e.printStackTrace();
             }
